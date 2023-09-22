@@ -58,6 +58,19 @@ app.get('/login', (req, res) => {
     res.render('admin/login', { text: 'login'})
 })
 
+app.post('/login', (req, res) => {
+    console.log({ requestFromOutside: req.body })
+    // const username = req.body.username
+    // if (username === usernameFromDbExist){
+    //     res.status(400).send("username already exists")
+    // }
+    res.send('Login succesful')
+});
+
+app.post('/login', (req, res) => {
+    res.json(req.body);
+});
+
 app.post('/', (req, res) => {
     res.json(req.body);
   });
