@@ -18,20 +18,6 @@ if (err) {
 }
 });
 
-app.get('/admin/data', (req, res) => {
-    const sqlQuery = 'SELECT * FROM datas';
-    
-    dbConnection.query(sqlQuery, (err, results) => {
-        if (err) {
-            console.error('Database query error:', err);
-            res.status(500).json({ error: 'Error fetching data from database' });
-        } else {
-            // res.json(results);
-            res.render('admin/data', {messages: results})
-        }
-    });
-});
-
 module.exports = dbConnection;
 
 // Static files
@@ -49,10 +35,6 @@ app.set('view engine', 'ejs')
 app.get('', (req, res) => {
     res.render('index', { text: 'Test'})
 })
-
-// app.get('/admin/data', (req, res) => {
-//     res.render('admin/data', { text: 'admin'})
-// })
 
 app.get('/login', (req, res) => {
     res.render('admin/login', { text: 'login'})
@@ -87,8 +69,70 @@ app.post('/submit-form', (req, res) => {
             res.redirect("/");
         }
     });
-    // const submitForm = JSON.stringify(req.body, null, 2);
-    // res.end(submitForm);
+});
+
+app.get('/admin/data', (req, res) => {
+    const sqlQuery = 'SELECT * FROM datas';
+    
+    dbConnection.query(sqlQuery, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            res.status(500).json({ error: 'Error fetching data from database' });
+        } else {
+            // res.json(results);
+            res.render('admin/data', {messages: results})
+        }
+    });
+});
+
+app.get('/admin/data/:id', (req, res) => {
+    const postId = req.params.id;
+    const sqlQuery = `SELECT * FROM datas WHERE data_id = ?`;
+
+    dbConnection.query(sqlQuery, [postId], (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            res.status(500).json({ error: 'Error fetching data from database' });
+        } else {
+            res.json(results);
+            // res.render('admin/data/', {messages: results})
+        }
+    });
+});
+
+app.post('/admin/data/:id', (req, res) => {
+    const postId = req.params.id;
+    const { name, email, message, review } = req.body;
+
+    const sqlQuery = `UPDATE datas SET name=?, email=?, message=?, review=? WHERE datas.data_id=?`;
+    const values = [name, email, message, review, postId];
+
+    dbConnection.query(sqlQuery, values, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            res.status(500).json({ error: 'Error updating data in the database' });
+        } else {
+            // console.log('result:', results);
+            // res.redirect("/admin/data");
+            res.json(results);
+        }
+    });
+});
+
+app.delete('/admin/data/:id', (req, res) => {
+    const postId = req.params.id;
+
+    const sqlQuery = `DELETE from datas WHERE datas.data_id=?`;
+    const values = [postId];
+
+    dbConnection.query(sqlQuery, values, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            res.status(500).json({ error: 'Error deleting data in the database' });
+        } else {
+            res.json(results);
+        }
+    });
 });
 
 //Port
