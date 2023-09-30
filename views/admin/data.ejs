@@ -55,7 +55,7 @@
           <h2>Edit Contact us</h2>
         </div>
         <div class="modal-body">
-          <form id="edit-form" action="/admin/data/" method="post">
+          <form id="edit-form" action="/admin/data/" method="post"  onsubmit="submitEditButtonClick(document.getElementById('data_id').value, event)">
             <!-- Form update data, langsung muncul data asli -->
             <label for="data_id">Id:</label>
             <input type="text" id="data_id" name="data_id" required readonly><br>
@@ -72,13 +72,13 @@
             <label for="review">Review:</label>
             <input type="text" id="review" name="review" required><br>
 
-            <!-- <button type="submit" id="submit-button">Submit</button> -->
-            <button id="submit-button"  onclick="submitEditButtonClick(document.getElementById('data_id').value)">Submit</button>
+            <button type="submit" id="submit-button">Submit</button>
+            <!-- <button id="submit-button"  onclick="submitEditButtonClick(document.getElementById('data_id').value)">Submit</button> -->
           </form>
         </div>
       </div>
     </div>
 
-    <script src="/js/script.js"></script>
+    <script src="/js/admin.js"></script>
   </body>
 </html>

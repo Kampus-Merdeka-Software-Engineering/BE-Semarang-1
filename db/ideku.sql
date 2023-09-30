@@ -67,6 +67,46 @@ ALTER TABLE `datas`
   MODIFY `data_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
+--
+-- Table structure for table `datas`
+--
+
+CREATE TABLE `admins` (
+  `admin_id` int(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `datas`
+--
+
+INSERT INTO `admins` (`admin_id`, `username`, `email`, `password`) VALUES
+(1, 'Dina Septy Puspayani', 'dinaseptypuspayani87@gmail.com', 'secret'),
+(2, 'dina', 'dinaseptypuspayani87@gmail.com', 'dina');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `datas`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`admin_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `datas`
+--
+ALTER TABLE `admins`
+  MODIFY `admin_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

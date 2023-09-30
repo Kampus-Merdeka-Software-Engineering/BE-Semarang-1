@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const mysql = require('mysql');
+const jwt = require('jsonwebtoken');
 
 const dbConnection = mysql.createConnection({
     host: '127.0.0.1',
@@ -19,6 +20,7 @@ if (err) {
 });
 
 module.exports = dbConnection;
+
 
 // Static files
 app.use(express.static('public'))
@@ -40,23 +42,6 @@ app.get('/login', (req, res) => {
     res.render('admin/login', { text: 'login'})
 })
 
-app.post('/login', (req, res) => {
-    console.log({ requestFromOutside: req.body })
-    // const username = req.body.username
-    // if (username === usernameFromDbExist){
-    //     res.status(400).send("username already exists")
-    // }
-    res.send('Login succesful')
-});
-
-app.post('/login', (req, res) => {
-    res.json(req.body);
-});
-
-app.post('/', (req, res) => {
-    res.json(req.body);
-  });
-
 app.post('/submit-form', (req, res) => {
     const query = `INSERT INTO datas(name, email, message, review)
     VALUES (?)`;
@@ -71,7 +56,84 @@ app.post('/submit-form', (req, res) => {
     });
 });
 
-app.get('/admin/data', (req, res) => {
+// Secret key to assign JWT
+const secretKey = 'justideku';
+// Generate token
+function generateToken(user) {
+    const payload = {
+      username: user.username,
+      email: user.email
+    }; 
+    // Expiration 1 hour
+    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+
+    return token;
+}
+// Verif token
+function verifyToken(token) {
+    try {
+      const decoded = jwt.verify(token, secretKey);
+      return decoded;
+    } catch (error) {
+      return null; // If token invalid or expired
+    }
+  }
+  
+module.exports = {
+    generateToken,
+    verifyToken,
+};
+
+function authenticateToken(req, res, next) {
+    const token = req.headers['Authorization']; // Send token in header "Authorization"
+    const tokenCookie = req.headers.cookie.split("token=")[1]
+    if (!token) {
+        if (!tokenCookie){
+            return res.status(401).json({ message: 'Token not provided' });
+        } 
+    }
+    // Verif token
+    let decoded 
+    if (!token){
+        decoded = verifyToken(tokenCookie)
+    } else {
+        decoded = verifyToken(token);
+    }
+    if (!decoded) {
+        return res.status(401).json({ message: 'Invalid token' });
+    }
+
+    req.user = decoded; // Save user authenticated at object req
+    next();
+}
+
+app.post('/login', (req, res) => {
+    const username = req.body.usernameLogin;
+    const email = req.body.emailLogin;
+    const password = req.body.passwordLogin;
+
+    const query = `SELECT * FROM admins WHERE username = ? AND email = ? AND password = ?`;
+    
+    dbConnection.query(query, [username, email, password], (err, results) => {
+        if (err) {
+          console.error('Database query error:', err);
+          res.status(500).json({ success: false, message: 'Login error' });
+        } else {
+          if (results.length > 0) {
+            // Login success, generate token
+            const user = results[0];
+            const token = generateToken(user);
+    
+            // Respons as json
+            res.json({ success: true, token: token });
+          } else {
+            res.json({ success: false, message: 'Login failed' });
+          }
+        }
+    });
+});
+
+app.get('/admin/data', authenticateToken, (req, res) => {
     const sqlQuery = 'SELECT * FROM datas';
     
     dbConnection.query(sqlQuery, (err, results) => {
@@ -85,7 +147,7 @@ app.get('/admin/data', (req, res) => {
     });
 });
 
-app.get('/admin/data/:id', (req, res) => {
+app.get('/admin/data/:id', authenticateToken, (req, res) => {
     const postId = req.params.id;
     const sqlQuery = `SELECT * FROM datas WHERE data_id = ?`;
 
@@ -100,7 +162,7 @@ app.get('/admin/data/:id', (req, res) => {
     });
 });
 
-app.post('/admin/data/:id', (req, res) => {
+app.post('/admin/data/:id', authenticateToken, (req, res) => {
     const postId = req.params.id;
     const { name, email, message, review } = req.body;
 
@@ -119,7 +181,7 @@ app.post('/admin/data/:id', (req, res) => {
     });
 });
 
-app.delete('/admin/data/:id', (req, res) => {
+app.delete('/admin/data/:id', authenticateToken, (req, res) => {
     const postId = req.params.id;
 
     const sqlQuery = `DELETE from datas WHERE datas.data_id=?`;
