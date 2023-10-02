@@ -10,10 +10,10 @@
     <script>
       
     </script>
-    <h1>Page Data</h1>
-    <table>
+    <h1 class="header-data">Page Data</h1><br><br>
+    <table class="table-data">
       <thead>
-        <tr>
+        <tr class="tr-data">
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
@@ -31,9 +31,9 @@
           <td><%=message.message %></td>
           <td><%=message.review %></td>
           <td>
-            <button onclick="idButtonClick('<%= message.data_id %>')">
+            <!-- <button onclick="idButtonClick('<%= message.data_id %>')">
               ID
-            </button>
+            </button> -->
             <button onclick="editButtonClick('<%= message.data_id %>')">
               Edit
             </button>
@@ -80,5 +80,9 @@
     </div>
 
     <script src="/js/admin.js"></script>
+    <style>
+      td, th {border: 1px solid #dddddd; padding: 8px;}
+      tr:nth-child(even) {background-color: #dddddd;}
+    </style>
   </body>
 </html>

@@ -53,7 +53,7 @@ app.post('/api/submit-form', (req, res) => {
             console.error('Database query error:', err);
             res.status(500).json({ error: 'Error fetching data from database' });
         } else {
-            res.redirect("/");
+            res.status(201).redirect("/");
         }
     });
 });
@@ -127,9 +127,9 @@ app.post('/api/login', (req, res) => {
             const token = generateToken(user);
     
             // Respons as json
-            res.json({ success: true, token: token });
+            res.status(200).json({ success: true, token: token });
           } else {
-            res.json({ success: false, message: 'Login failed' });
+            res.status(403).json({ success: false, message: 'Login failed' });
           }
         }
     });
@@ -158,7 +158,7 @@ app.get('/api/admin/data/:id', authenticateToken, (req, res) => {
             console.error('Database query error:', err);
             res.status(500).json({ error: 'Error fetching data from database' });
         } else {
-            res.json(results);
+            res.status(200).json(results);
             // res.render('admin/data/', {messages: results})
         }
     });
@@ -178,7 +178,7 @@ app.post('/api/admin/data/:id', authenticateToken, (req, res) => {
         } else {
             // console.log('result:', results);
             // res.redirect("/admin/data");
-            res.json(results);
+            res.status(200).json(results);
         }
     });
 });
@@ -194,7 +194,7 @@ app.delete('/api/admin/data/:id', authenticateToken, (req, res) => {
             console.error('Database query error:', err);
             res.status(500).json({ error: 'Error deleting data in the database' });
         } else {
-            res.json(results);
+            res.status(200).json(results);
         }
     });
 });
