@@ -26,7 +26,7 @@ function editButtonClick(postId) {
     }
 }
   // Kirim permintaan untuk mengambil data dari server yang ditampilkan di form
-  fetch(`http://be-semarang-g-1-production.up.railway.app/api/admin/data/${postId}`)
+  fetch(`https://be-semarang-g-1-production.up.railway.app/api/admin/data/${postId}`)
     .then((response) => response.json())
     .then((data) => {
       const message = data[0]; // Ambil elemen pertama dari array data
@@ -55,7 +55,7 @@ function submitEditButtonClick(postId, event) {
         postId: postId, // Sertakan postId di sini
     };
     // Kirim permintaan POST ke server
-    fetch(`http://be-semarang-g-1-production.up.railway.app/api/admin/data/${postId}`, {
+    fetch(`https://be-semarang-g-1-production.up.railway.app/api/admin/data/${postId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ function deleteButtonClick(postId) {
     const confirmDelete = confirm("Apakah Anda yakin ingin menghapus data ini?");
     if (confirmDelete) {
     // Kirim permintaan DELETE ke server
-    fetch(`http://be-semarang-g-1-production.up.railway.app/api/admin/data/${postId}`, {
+    fetch(`https://be-semarang-g-1-production.up.railway.app/api/admin/data/${postId}`, {
         method: 'DELETE',
     })
         .then((response) => response.json())
@@ -104,7 +104,7 @@ function submitLogin(event) {
   };
 
   // Kirim permintaan POST ke server
-  fetch(`http://be-semarang-g-1-production.up.railway.app/api/login`, {
+  fetch(`https://be-semarang-g-1-production.up.railway.app/api/login`, {
       method: 'POST',
       headers: {
       'Content-Type': 'application/json',
