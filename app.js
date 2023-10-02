@@ -1,14 +1,16 @@
 const express = require('express')
 const app = express()
-const port = 3000
-const mysql = require('mysql');
+const port = process.env.PORT || 3000;
+const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
 
 const dbConnection = mysql.createConnection({
-    host: '127.0.0.1',
+    host: 'containers-us-west-191.railway.app',
     user: 'root',
-    password: '',
-    database: 'ideku',
+    password: 'afYPKtqEsb1Xnm6JsHbT',
+    database: 'railway',
+    port: 7030,
+    
   });
 
 dbConnection.connect((err) => {

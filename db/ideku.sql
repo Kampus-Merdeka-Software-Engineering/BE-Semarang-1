@@ -41,10 +41,7 @@ CREATE TABLE `datas` (
 
 INSERT INTO `datas` (`data_id`, `name`, `email`, `message`, `review`) VALUES
 (1, 'Dina Septy Puspayani', 'dinaseptypuspayani87@gmail.com', 'Test message', 'Unreviewed'),
-(2, 'Dina Septy Puspayani', 'dinaseptypuspayani87@gmail.com', 'asdasd', 'unreview'),
-(3, 'Dina Septy Puspayani', 'dinaseptypuspayani87@gmail.com', 'asdasd', 'unreview'),
-(4, 'Dina Septy Puspayani', 'dinaseptypuspayani87@gmail.com', 'asdasd', 'unreview'),
-(5, 'Dina Septy Puspayani', 'dinaseptypuspayani87@gmail.com', 'test1234', 'unreview');
+(2, 'Dina Septy Puspayani', 'dinaseptypuspayani87@gmail.com', 'test1234', 'Unreviewed');
 
 --
 -- Indexes for dumped tables
@@ -83,7 +80,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`admin_id`, `username`, `email`, `password`) VALUES
-(1, 'Dina Septy Puspayani', 'dinaseptypuspayani87@gmail.com', 'secret'),
+(1, 'dina1', 'dinaseptypuspayani87@gmail.com', 'secret'),
 (2, 'dina', 'dinaseptypuspayani87@gmail.com', 'dina');
 
 --
