@@ -10,7 +10,7 @@ const dbConnection = mysql.createConnection({
     password: 'afYPKtqEsb1Xnm6JsHbT',
     database: 'railway',
     port: 7030,
-    
+
   });
 
 dbConnection.connect((err) => {
@@ -44,7 +44,7 @@ app.get('/login', (req, res) => {
     res.render('admin/login', { text: 'login'})
 })
 
-app.post('/submit-form', (req, res) => {
+app.post('/api/submit-form', (req, res) => {
     const query = `INSERT INTO datas(name, email, message, review)
     VALUES (?)`;
     const value = [req.body.name, req.body.email, req.body.message, "Unreviewed"];
@@ -109,7 +109,7 @@ function authenticateToken(req, res, next) {
     next();
 }
 
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
     const username = req.body.usernameLogin;
     const email = req.body.emailLogin;
     const password = req.body.passwordLogin;
@@ -149,7 +149,7 @@ app.get('/admin/data', authenticateToken, (req, res) => {
     });
 });
 
-app.get('/admin/data/:id', authenticateToken, (req, res) => {
+app.get('/api/admin/data/:id', authenticateToken, (req, res) => {
     const postId = req.params.id;
     const sqlQuery = `SELECT * FROM datas WHERE data_id = ?`;
 
@@ -164,7 +164,7 @@ app.get('/admin/data/:id', authenticateToken, (req, res) => {
     });
 });
 
-app.post('/admin/data/:id', authenticateToken, (req, res) => {
+app.post('/api/admin/data/:id', authenticateToken, (req, res) => {
     const postId = req.params.id;
     const { name, email, message, review } = req.body;
 
@@ -183,7 +183,7 @@ app.post('/admin/data/:id', authenticateToken, (req, res) => {
     });
 });
 
-app.delete('/admin/data/:id', authenticateToken, (req, res) => {
+app.delete('/api/admin/data/:id', authenticateToken, (req, res) => {
     const postId = req.params.id;
 
     const sqlQuery = `DELETE from datas WHERE datas.data_id=?`;

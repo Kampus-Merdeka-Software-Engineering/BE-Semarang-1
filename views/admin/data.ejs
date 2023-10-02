@@ -55,7 +55,7 @@
           <h2>Edit Contact us</h2>
         </div>
         <div class="modal-body">
-          <form id="edit-form" action="/admin/data/" method="post"  onsubmit="submitEditButtonClick(document.getElementById('data_id').value, event)">
+          <form id="edit-form" action="/api/admin/data/" method="post"  onsubmit="submitEditButtonClick(document.getElementById('data_id').value, event)">
             <!-- Form update data, langsung muncul data asli -->
             <label for="data_id">Id:</label>
             <input type="text" id="data_id" name="data_id" required readonly><br>
