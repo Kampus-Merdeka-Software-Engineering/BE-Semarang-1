@@ -1,9 +1,4 @@
-///////////// PAGE data.ejs /////////////
-
-function idButtonClick(postId) {
-    console.log(`ID Post ${postId}`);
-  }
-  
+///////////// PAGE DATA /////////////
 function editButtonClick(postId) {
   // Get modal
   var modal = document.getElementById("myModal");
@@ -29,12 +24,12 @@ function editButtonClick(postId) {
   fetch(`https://be-semarang-g-1-production.up.railway.app/api/admin/data/${postId}`)
     .then((response) => response.json())
     .then((data) => {
-      const message = data[0]; // Ambil elemen pertama dari array data
-      document.getElementById("data_id").value = message.data_id;
-      document.getElementById("name").value = message.name;
-      document.getElementById("email").value = message.email;
-      document.getElementById("message").innerText = message.message;
-      document.getElementById("review").value = message.review;
+        const message = data[0]; // Ambil elemen pertama dari array data
+        document.getElementById("data_id").value = message.data_id;
+        document.getElementById("name").value = message.name;
+        document.getElementById("email").value = message.email;
+        document.getElementById("message").innerText = message.message;
+        document.getElementById("review").value = message.review;
   
       // Menampilkan modal
       modal.style.display = "block";
@@ -52,9 +47,8 @@ function submitEditButtonClick(postId, event) {
         email: document.getElementById('email').value,
         message: document.getElementById('message').value,
         review: document.getElementById('review').value,
-        postId: postId, // Sertakan postId di sini
+        postId: postId,
     };
-    // Kirim permintaan POST ke server
     fetch(`https://be-semarang-g-1-production.up.railway.app/api/admin/data/${postId}`, {
         method: 'POST',
         headers: {
@@ -77,7 +71,6 @@ function submitEditButtonClick(postId, event) {
 function deleteButtonClick(postId) {
     const confirmDelete = confirm("Apakah Anda yakin ingin menghapus data ini?");
     if (confirmDelete) {
-    // Kirim permintaan DELETE ke server
     fetch(`https://be-semarang-g-1-production.up.railway.app/api/admin/data/${postId}`, {
         method: 'DELETE',
     })
@@ -92,7 +85,45 @@ function deleteButtonClick(postId) {
         });
     }
 }
-///////////////////////////////////////
+
+const tableBody = document.getElementById('table-body-data');
+fetch('https://be-semarang-g-1-production.up.railway.app/admin/data/')
+  .then((response) => response.json())
+  .then((data) => {
+    if (data.success) {
+      const messages = data.messages;
+
+      messages.forEach((message) => {
+        const newRow = document.createElement('tr');
+        const dataElement = `
+          <td style="text-align: center;">${message.data_id}</td>
+          <td>${message.name}</td>
+          <td>${message.email}</td>
+          <td>${message.message}</td>
+          <td>${message.review}</td>
+          <td>
+            <center>
+              <button onclick="editButtonClick('${message.data_id}')" style="width: 47%; height: 20px; border: 1px solid; background: #28a745; border-radius: 5px; color: #e9f4fb; font-weight: 500; cursor: pointer; outline: none;">
+                Edit
+              </button>
+              <button onclick="deleteButtonClick('${message.data_id}')" style="width: 47%; height: 20px; border: 1px solid; background: #dc3545; border-radius: 5px; color: #e9f4fb; font-weight: 500; cursor: pointer; outline: none;">
+                Delete
+              </button>
+            </center>
+          </td>
+        `;
+        newRow.innerHTML = dataElement;
+        tableBody.appendChild(newRow);
+      });
+    } else {
+      console.error('Error fetching data:', data.error);
+    }
+  })
+  .catch((error) => {
+    console.error('Error fetching data:', error);
+  });
+
+///////////// PAGE LOGIN /////////////
 
 function submitLogin(event) {
   event.preventDefault();
@@ -128,7 +159,7 @@ function submitLogin(event) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const token = localStorage.getItem('token'); // from Local storage
+  const token = localStorage.getItem('token'); // token from Local storage
   if (!token) {
       // Token not found, balik ke halaman login
       window.location.href = '/login';
@@ -144,11 +175,6 @@ document.addEventListener("DOMContentLoaded", function () {
           if (!response.ok) {
               throw new Error('Network response was not ok');
           }
-        //   return response.json();
-      })
-      .then(data => {
-          // console.log('Data from /admin/data:', data);
-          // renderDataOnPage(data);
       })
       .catch(error => {
           console.error('Error fetching data:', error);

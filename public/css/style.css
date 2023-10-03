@@ -637,34 +637,3 @@ input[type="submit"]:hover{
   background-color: #bdcdd6;
   color: white;
 }
-
-/*Data*/
-.table-data {
-  font-family: "Poppins", sans-serif;
-  border-collapse: collapse;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
-}
-
-.header-data {
-  text-align: center;
-  font-size: 2.6rem;
-  margin-bottom: 3rem;
-  margin-top: 3rem;
-}
-
-.tr-data {
-  text-align: center;
-  background-color: #84acc5;
-}
-
-.header-data-modals {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
-}
