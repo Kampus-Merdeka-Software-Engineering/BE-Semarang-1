@@ -9,7 +9,9 @@ const { getAdminData, getIdAdminData, postIdAdminData, deleteIdAdminData } = req
 const { submitForm } = require('./controller/submitform.controller');
 const { postLogin } = require('./controller/login.controller');
 
-app.use(cors())
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cors());
 
 dbConnection.connect((err) => {
 if (err) {
