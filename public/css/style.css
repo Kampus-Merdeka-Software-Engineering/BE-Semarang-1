@@ -588,9 +588,9 @@ input[type="submit"]:hover{
   position: relative;
   background-color: #fefefe;
   margin: auto;
-  padding: 0;
+  padding: 8px;
   border: 1px solid #888;
-  width: 100%;
+  width: 70%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -613,7 +613,7 @@ input[type="submit"]:hover{
 .close {
   color: white;
   float: right;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: bold;
 }
 
@@ -626,7 +626,7 @@ input[type="submit"]:hover{
 
 .modal-header {
   padding: 2px 16px;
-  background-color: #5cb85c;
+  background-color: #84acc5;
   color: white;
 }
 
@@ -634,7 +634,7 @@ input[type="submit"]:hover{
 
 .modal-footer {
   padding: 2px 16px;
-  background-color: #5cb85c;
+  background-color: #bdcdd6;
   color: white;
 }
 
@@ -668,4 +668,3 @@ input[type="submit"]:hover{
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
 }
-
