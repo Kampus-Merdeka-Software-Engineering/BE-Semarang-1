@@ -87,7 +87,7 @@ function deleteButtonClick(postId) {
 }
 
 const tableBody = document.getElementById('table-body-data');
-fetch('https://be-semarang-g-1-production.up.railway.app/admin/data/')
+fetch('https://be-semarang-g-1-production.up.railway.app/api/admin/data/')
   .then((response) => response.json())
   .then((data) => {
     if (data.success) {
