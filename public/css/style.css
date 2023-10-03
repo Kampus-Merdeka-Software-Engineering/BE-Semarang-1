@@ -650,14 +650,22 @@ input[type="submit"]:hover{
   box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
 }
 
-/* .header-data {
+.header-data {
   text-align: center;
-  text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
-  line-height: 1.2;
-} */
+  font-size: 2.6rem;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
 
 .tr-data {
   text-align: center;
-  background-color: #adadad;
+  background-color: #84acc5;
+}
+
+.header-data-modals {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
 

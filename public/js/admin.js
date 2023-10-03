@@ -115,7 +115,6 @@ function submitLogin(event) {
       .then((data) => {
       if (data.success) {
           const token = data.token; //token from server
-        //   const token = localStorage.getItem('token');
           localStorage.setItem('token', token); // save to local storage
           document.cookie = `token=${token}`
           window.location.href = '/admin/data';
@@ -145,11 +144,11 @@ document.addEventListener("DOMContentLoaded", function () {
           if (!response.ok) {
               throw new Error('Network response was not ok');
           }
-          return response.json();
+        //   return response.json();
       })
       .then(data => {
           // console.log('Data from /admin/data:', data);
-          renderDataOnPage(data);
+          // renderDataOnPage(data);
       })
       .catch(error => {
           console.error('Error fetching data:', error);

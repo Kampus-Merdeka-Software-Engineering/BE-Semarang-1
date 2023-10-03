@@ -53,7 +53,7 @@ app.post('/api/submit-form', (req, res) => {
             console.error('Database query error:', err);
             res.status(500).json({ error: 'Error fetching data from database' });
         } else {
-            res.status(201).redirect("/");
+            res.status(201);
         }
     });
 });
@@ -159,7 +159,6 @@ app.get('/api/admin/data/:id', authenticateToken, (req, res) => {
             res.status(500).json({ error: 'Error fetching data from database' });
         } else {
             res.status(200).json(results);
-            // res.render('admin/data/', {messages: results})
         }
     });
 });
@@ -176,8 +175,6 @@ app.post('/api/admin/data/:id', authenticateToken, (req, res) => {
             console.error('Database query error:', err);
             res.status(500).json({ error: 'Error updating data in the database' });
         } else {
-            // console.log('result:', results);
-            // res.redirect("/admin/data");
             res.status(200).json(results);
         }
     });

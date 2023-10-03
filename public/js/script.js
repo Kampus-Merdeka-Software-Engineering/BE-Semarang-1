@@ -14,3 +14,30 @@ document.addEventListener("click", function (e) {
   }
 });
 
+const btn = document.getElementById('btn'); 
+
+btn.addEventListener('click', () => {
+  const name = document.getElementById('input-name').value;
+  const email = document.getElementById('input-email').value;
+  const message = document.getElementById('input-message').value;
+
+  if (!name || !email || !message) {
+      Swal.fire({
+          title: 'Required',
+          text: 'Please fill in all fields.',
+          icon: 'info',
+      });
+      return;
+  } else {
+    Swal.fire({
+      title: 'Thank you for submitting!',
+      text: 'We got your message.',
+      icon: 'success',
+    }).then((result) => {
+      if (result.isConfirmed) {
+          window.location.href = "/";
+      }
+  });
+  }
+  document.querySelector('form').submit();
+});
