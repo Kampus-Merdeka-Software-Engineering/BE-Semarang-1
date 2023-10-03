@@ -8,6 +8,7 @@ const dbConnection = require('./db/db');
 const { getAdminData, getIdAdminData, postIdAdminData, deleteIdAdminData } = require('./controller/admin.controller');
 const { submitForm } = require('./controller/submitform.controller');
 const { postLogin } = require('./controller/login.controller');
+const { verifyToken } = require('./helper/jwt');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -21,32 +22,6 @@ if (err) {
 }
 });
 
-// Secret key to assign JWT
-const secretKey = 'justideku';
-// Generate token
-function generateToken(user) {
-    const payload = {
-      username: user.username,
-      email: user.email
-    }; 
-    // Expiration 1 hour
-    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
-    return token;
-}
-// Verif token
-function verifyToken(token) {
-    try {
-      const decoded = jwt.verify(token, secretKey);
-      return decoded;
-    } catch (error) {
-      return null; // If token invalid or expired
-    }
-  }
-  
-module.exports = {
-    generateToken,
-    verifyToken,
-};
 
 function authenticateToken(req, res, next) {
     const token = req.headers['Authorization']; // Send token in header "Authorization"

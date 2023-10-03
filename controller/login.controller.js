@@ -1,14 +1,15 @@
 const dbConnection = require('../db/db');
-const { generateToken } = require('../app')
+const { generateToken } = require('../helper/jwt');
 
 // function getLogin(req, res) {
 //     res.status(200).json({success: true, messages: results})
 // }
 
 function postLogin(req, res) {
-    const username = req.body.usernameLogin;
-    const email = req.body.emailLogin;
-    const password = req.body.passwordLogin;
+  
+  const username = req.body.usernameLogin;
+  const email = req.body.emailLogin;
+  const password = req.body.passwordLogin;
 
     const query = `SELECT * FROM admins WHERE username = ? AND email = ? AND password = ?`;
     
