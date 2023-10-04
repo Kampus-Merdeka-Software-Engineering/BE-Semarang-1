@@ -9,7 +9,7 @@ function submitForm(req, res) {
             console.error('Database query error:', err);
             res.status(500).json({ error: 'Error fetching data from database' });
         } else {
-            res.status(201).son(results);
+            res.status(201).json(results);
         }
     });
 };
