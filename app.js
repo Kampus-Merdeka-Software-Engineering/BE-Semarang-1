@@ -24,7 +24,7 @@ if (err) {
 
 
 function authenticateToken(req, res, next) {
-    const token = req.headers['Authorization']; // Send token in header "Authorization"
+    const token = req.headers['authorization']?.split("Bearer ")[1]; // Send token in header "Authorization"
     const tokenCookie = req.headers.cookie.split("token=")[1]
     if (!token) {
         if (!tokenCookie){
