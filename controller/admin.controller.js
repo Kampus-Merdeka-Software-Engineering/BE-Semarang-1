@@ -22,7 +22,7 @@ function getIdAdminData(req, res) {
             console.error('Database query error:', err);
             res.status(500).json({ error: 'Error fetching data from database' });
         } else {
-            res.status(200).json({ success: true, results });
+            res.status(200).json( results );
         }
     });
 };
@@ -39,7 +39,7 @@ function postIdAdminData(req, res) {
             console.error('Database query error:', err);
             res.status(500).json({ error: 'Error updating data in the database' });
         } else {
-            res.status(200).json({ success: true, results });
+            res.status(200).json( results );
         }
     });
 };
@@ -55,7 +55,7 @@ function deleteIdAdminData(req, res) {
             console.error('Database query error:', err);
             res.status(500).json({ error: 'Error deleting data in the database' });
         } else {
-            res.status(200).json({ success: true, results });
+            res.status(200).json( results );
         }
     });
 };
