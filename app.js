@@ -25,7 +25,7 @@ if (err) {
 function authenticateToken(req, res, next) {
     const token = req.headers['authorization']?.split("Bearer ")[1];
     if (!token) {
-        return res.status(401).json({ message: 'Token not providedd' });
+        return res.status(401).json({ message: 'Token not provided' });
     }
     // Verif token
     const decoded = verifyToken(token);
