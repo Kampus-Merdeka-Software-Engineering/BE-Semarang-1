@@ -24,23 +24,15 @@ if (err) {
 
 function authenticateToken(req, res, next) {
     const token = req.headers['authorization']?.split("Bearer ")[1];
-    const tokenCookie = req.headers.cookie.split("token=")[1]
     if (!token) {
-        if (!tokenCookie){
-            return res.status(401).json({ message: 'Token not provided' });
-        } 
+        return res.status(401).json({ message: 'Token not providedd' });
     }
     // Verif token
-    let decoded 
-    if (!token){
-        decoded = verifyToken(tokenCookie)
-    } else {
-        decoded = verifyToken(token);
-    }
+    const decoded = verifyToken(token);
     if (!decoded) {
         return res.status(401).json({ message: 'Invalid token' });
     }
-    req.user = decoded; // Save user authenticated at object req
+    req.user = decoded; // Menyimpan pengguna yang diotentikasi dalam objek req
     next();
 }
 
