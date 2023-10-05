@@ -1,5 +1,5 @@
 const dbConnection = require('../db/db');
-const { generateToken } = require('../helper/jwt');
+const { generateToken } = require('../auth/jwt');
 
 function postLogin(req, res) {
   
