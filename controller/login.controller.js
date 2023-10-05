@@ -1,9 +1,5 @@
 const dbConnection = require('../db/db');
-const { generateToken } = require('../helper/jwt');
-
-// function getLogin(req, res) {
-//     res.status(200).json({success: true, messages: results})
-// }
+const { generateToken } = require('../auth/jwt');
 
 function postLogin(req, res) {
   
@@ -19,7 +15,6 @@ function postLogin(req, res) {
           res.status(500).json({ success: false, message: 'Login error' });
         } else {
           if (results.length > 0) {
-            // Login success, generate token
             const user = results[0];
             const token = generateToken(user);
             res.status(200).json({ success: true, token: token });

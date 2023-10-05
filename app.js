@@ -8,7 +8,7 @@ const dbConnection = require('./db/db');
 const { getAdminData, getIdAdminData, postIdAdminData, deleteIdAdminData } = require('./controller/admin.controller');
 const { submitForm } = require('./controller/submitform.controller');
 const { postLogin } = require('./controller/login.controller');
-const { verifyToken } = require('./helper/jwt');
+const { verifyToken } = require('./auth/jwt');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -22,9 +22,8 @@ if (err) {
 }
 });
 
-
 function authenticateToken(req, res, next) {
-    const token = req.headers['authorization']?.split("Bearer ")[1]; // Send token in header "Authorization"
+    const token = req.headers['authorization']?.split("Bearer ")[1];
     const tokenCookie = req.headers.cookie.split("token=")[1]
     if (!token) {
         if (!tokenCookie){
