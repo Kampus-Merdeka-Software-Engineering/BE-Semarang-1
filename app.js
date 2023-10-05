@@ -51,7 +51,7 @@ app.post('/api/submit-form', submitForm);
 app.post('/api/login', postLogin);
 
 // Admin Data
-app.get('/api/admin/data', getAdminData);
+app.get('/api/admin/data', authenticateToken, getAdminData);
 app.get('/api/admin/data/:id', authenticateToken, getIdAdminData);
 app.post('/api/admin/data/:id', authenticateToken, postIdAdminData);
 app.delete('/api/admin/data/:id', authenticateToken, deleteIdAdminData);
