@@ -7,7 +7,6 @@ function getAdminData(req, res) {
             console.error('Database query error:', err);
             res.status(500).json({ error: 'Error fetching data from database' });
         } else {
-            // res.render('admin/data', {messages: results})
             res.status(200).json({ success: true, messages: results })
         }
     });
