@@ -17,7 +17,7 @@ function postLogin(req, res) {
           if (results.length > 0) {
             const user = results[0];
             const token = generateToken(user);
-            res.status(200).json({ success: true, token: token });
+            res.status(200).json({ success: true, token: token, username: username });
           } else {
             res.status(403).json({ success: false, message: 'Login failed' });
           }
