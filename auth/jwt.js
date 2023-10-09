@@ -1,4 +1,3 @@
-
 const jwt = require('jsonwebtoken');
 
 // Secret key to assign JWT
