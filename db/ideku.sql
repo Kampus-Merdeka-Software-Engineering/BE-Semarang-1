@@ -36,18 +36,6 @@ CREATE TABLE `datas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `datas`
---
-
-INSERT INTO `datas` (`data_id`, `name`, `email`, `message`, `review`) VALUES
-(1, 'Dina Septy Puspayani', 'dinaseptypuspayani87@gmail.com', 'Test message', 'Unreviewed'),
-(2, 'Dina Septy Puspayani', 'dinaseptypuspayani87@gmail.com', 'test1234', 'Unreviewed');
-
---
--- Indexes for dumped tables
---
-
---
 -- Indexes for table `datas`
 --
 ALTER TABLE `datas`
@@ -75,17 +63,6 @@ CREATE TABLE `admins` (
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `datas`
---
-
-INSERT INTO `admins` (`admin_id`, `username`, `email`, `password`) VALUES
-(1, 'dina1', 'dinaseptypuspayani87@gmail.com', 'secret'),
-(2, 'dina', 'dinaseptypuspayani87@gmail.com', 'dina');
-
---
--- Indexes for dumped tables
---
 
 --
 -- Indexes for table `datas`
